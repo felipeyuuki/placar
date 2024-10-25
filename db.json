@@ -1,0 +1,43 @@
+{
+  "placar": [
+    {
+      "id": "1",
+      "nomeJogador": "FelipeYuuki",
+      "pontuacao": 100,
+      "game": "Sirils"
+    },
+    {
+      "id": "2",
+      "nomeJogador": "Sol",
+      "pontuacao": 200,
+      "equipe": "Minerik"
+    },
+    {
+      "id": "0274",
+      "nomeJogador": "Mirian",
+      "pontuacao": "234",
+      "game": "Pokemon"
+    },
+    {
+      "id": "3b9e",
+      "nomeJogador": "sei lah",
+      "pontuacao": "364",
+      "game": "minecraft"
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "text": "a comment about post 1",
+      "postId": "1"
+    },
+    {
+      "id": "2",
+      "text": "another comment about post 1",
+      "postId": "1"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

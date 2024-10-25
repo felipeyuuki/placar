@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placares de Jogos</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        form { margin-bottom: 20px; }
+        input, button { margin: 5px; }
+        .placares { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Placares de Jogos</h1>
+    
+    <form id="placarForm">
+        <input type="text" id="nomeJogador" placeholder="Nome do Jogador" required />
+        <input type="number" id="pontuacao" placeholder="Pontuação" required />
+        <input type="text" id="game" placeholder="Nome do Jogo" required />
+        <button type="submit">Adicionar Placar</button>
+    </form>
+    
+    <div class="placares" id="placares"></div>
+    
+    <script>
+        const apiUrl = 'http://localhost:3000/placar';
+
+        async function fetchPlacares() {
+            const response = await fetch(apiUrl);
+            const placares = await response.json();
+            const placaresContainer = document.getElementById('placares');
+            placaresContainer.innerHTML = '';
+
+            placares.forEach(placar => {
+                const placarDiv = document.createElement('div');
+                placarDiv.textContent = `Jogador: ${placar.nomeJogador}, Pontuação: ${placar.pontuacao}, Jogo: ${placar.game}`;
+                placaresContainer.appendChild(placarDiv);
+            });
+        }
+
+        async function addPlacar(event) {
+            event.preventDefault();
+            
+            const nomeJogador = document.getElementById('nomeJogador').value;
+            const pontuacao = document.getElementById('pontuacao').value;
+            const game = document.getElementById('game').value;
+
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    nomeJogador,
+                    pontuacao,
+                    game
+                })
+            });
+
+            if (response.ok) {
+                document.getElementById('placarForm').reset();
+                fetchPlacares();
+            }
+        }
+
+        document.getElementById('placarForm').addEventListener('submit', addPlacar);
+        fetchPlacares();
+    </script>
+</body>
+</html>
