@@ -4,14 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Placares de Jogos</title>
-    <!-- Link para o Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
     <div class="container my-5">
         <h1 class="text-center mb-4">Placares de Jogos</h1>
         
-        <!-- Formulário -->
         <form id="placarForm" class="border p-4 rounded shadow-sm bg-white">
             <div class="form-group">
                 <label for="nomeJogador">Nome do Jogador</label>
@@ -28,25 +26,22 @@
             <button type="submit" class="btn btn-primary btn-block">Adicionar Placar</button>
         </form>
         
-        <!-- Lista de Placares -->
         <div class="placares mt-5">
             <h2 class="text-center">Lista de Placares</h2>
             <div id="placares" class="list-group mt-3"></div>
         </div>
     </div>
 
-    <!-- Script do Bootstrap JS e do JavaScript -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Script JavaScript -->
     <script>
         const apiUrl = 'http://localhost:3000/placar';
 
-        // Função para gerar um avatar aleatório usando RoboHash
+        // Função para gerar um avatar aleatório com Lorem Picsum
         function getRandomAvatarUrl() {
             const randomId = Math.floor(Math.random() * 1000);
-            return `https://robohash.org/${randomId}.png?set=set1`; // Usa conjunto de avatares 1
+            return `https://picsum.photos/seed/${randomId}/40`;
         }
 
         async function fetchPlacares() {
@@ -56,10 +51,9 @@
             placaresContainer.innerHTML = '';
 
             placares.forEach(placar => {
-                const placarItem = document.createElement('a');
-                placarItem.className = 'list-group-item list-group-item-action d-flex align-items-center';
+                const placarItem = document.createElement('div');
+                placarItem.className = 'list-group-item d-flex justify-content-between align-items-center';
                 
-                // Usa o link de avatar salvo
                 const avatar = document.createElement('img');
                 avatar.src = placar.avatar;
                 avatar.className = 'rounded-circle mr-3';
@@ -71,8 +65,25 @@
                                         <strong>Pontuação:</strong> ${placar.pontuacao}<br>
                                         <strong>Jogo:</strong> ${placar.game}`;
                 
+                // Botão de Editar
+                const editButton = document.createElement('button');
+                editButton.className = 'btn btn-sm btn-warning ml-2';
+                editButton.textContent = 'Editar';
+                editButton.onclick = () => editPontuacao(placar.id, placar.pontuacao);
+                
+                // Botão de Apagar
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'btn btn-sm btn-danger ml-2';
+                deleteButton.textContent = 'Apagar';
+                deleteButton.onclick = () => deletePlacar(placar.id);
+
+                const buttonGroup = document.createElement('div');
+                buttonGroup.appendChild(editButton);
+                buttonGroup.appendChild(deleteButton);
+
                 placarItem.appendChild(avatar);
                 placarItem.appendChild(placarInfo);
+                placarItem.appendChild(buttonGroup);
                 placaresContainer.appendChild(placarItem);
             });
         }
@@ -83,7 +94,7 @@
             const nomeJogador = document.getElementById('nomeJogador').value;
             const pontuacao = document.getElementById('pontuacao').value;
             const game = document.getElementById('game').value;
-            const avatar = getRandomAvatarUrl(); // Gera um avatar aleatório com RoboHash
+            const avatar = getRandomAvatarUrl();
 
             const response = await fetch(apiUrl, {
                 method: 'POST',
@@ -92,12 +103,29 @@
                     nomeJogador,
                     pontuacao,
                     game,
-                    avatar  // Salva o link de avatar aleatório
+                    avatar
                 })
             });
 
             if (response.ok) {
                 document.getElementById('placarForm').reset();
+                fetchPlacares();
+            }
+        }
+
+        async function deletePlacar(id) {
+            await fetch(`${apiUrl}/${id}`, { method: 'DELETE' });
+            fetchPlacares();
+        }
+
+        async function editPontuacao(id, currentPontuacao) {
+            const novaPontuacao = prompt("Digite a nova pontuação:", currentPontuacao);
+            if (novaPontuacao !== null) {
+                await fetch(`${apiUrl}/${id}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ pontuacao: novaPontuacao })
+                });
                 fetchPlacares();
             }
         }
