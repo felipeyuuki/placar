@@ -4,40 +4,43 @@
       "id": "1",
       "nomeJogador": "FelipeYuuki",
       "pontuacao": 100,
-      "game": "Sirils"
+      "game": "Sirils",
+      "avatar": "https://robohash.org/texto.png?set=set1"
     },
     {
       "id": "2",
       "nomeJogador": "Sol",
       "pontuacao": 200,
-      "equipe": "Minerik"
+      "equipe": "Minerik",
+      "avatar": "https://robohash.org/1674.png?set=set1"
     },
     {
       "id": "0274",
       "nomeJogador": "Mirian",
       "pontuacao": "234",
-      "game": "Pokemon"
+      "game": "Pokemon",
+      "avatar": "https://robohash.org/974.png?set=set1"
     },
     {
       "id": "3b9e",
       "nomeJogador": "sei lah",
       "pontuacao": "364",
-      "game": "minecraft"
-    }
-  ],
-  "comments": [
-    {
-      "id": "1",
-      "text": "a comment about post 1",
-      "postId": "1"
+      "game": "minecraft",
+      "avatar": "https://robohash.org/sol.png?set=set1"
     },
     {
-      "id": "2",
-      "text": "another comment about post 1",
-      "postId": "1"
+      "id": "fb7a",
+      "nomeJogador": "Bill",
+      "pontuacao": "321",
+      "game": "Harvest Moon",
+      "avatar": "https://robohash.org/874.png?set=set1"
+    },
+    {
+      "id": "af7c",
+      "nomeJogador": "fulano",
+      "pontuacao": "4553",
+      "game": "Core Keeper",
+      "avatar": "https://robohash.org/674.png?set=set1"
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }

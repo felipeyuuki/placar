@@ -4,27 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Placares de Jogos</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        form { margin-bottom: 20px; }
-        input, button { margin: 5px; }
-        .placares { margin-top: 20px; }
-    </style>
+    <!-- Link para o Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Placares de Jogos</h1>
-    
-    <form id="placarForm">
-        <input type="text" id="nomeJogador" placeholder="Nome do Jogador" required />
-        <input type="number" id="pontuacao" placeholder="Pontuação" required />
-        <input type="text" id="game" placeholder="Nome do Jogo" required />
-        <button type="submit">Adicionar Placar</button>
-    </form>
-    
-    <div class="placares" id="placares"></div>
-    
+<body class="bg-light">
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Placares de Jogos</h1>
+        
+        <!-- Formulário -->
+        <form id="placarForm" class="border p-4 rounded shadow-sm bg-white">
+            <div class="form-group">
+                <label for="nomeJogador">Nome do Jogador</label>
+                <input type="text" id="nomeJogador" class="form-control" placeholder="Nome do Jogador" required />
+            </div>
+            <div class="form-group">
+                <label for="pontuacao">Pontuação</label>
+                <input type="number" id="pontuacao" class="form-control" placeholder="Pontuação" required />
+            </div>
+            <div class="form-group">
+                <label for="game">Nome do Jogo</label>
+                <input type="text" id="game" class="form-control" placeholder="Nome do Jogo" required />
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Adicionar Placar</button>
+        </form>
+        
+        <!-- Lista de Placares -->
+        <div class="placares mt-5">
+            <h2 class="text-center">Lista de Placares</h2>
+            <div id="placares" class="list-group mt-3"></div>
+        </div>
+    </div>
+
+    <!-- Script do Bootstrap JS e do JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script JavaScript -->
     <script>
         const apiUrl = 'http://localhost:3000/placar';
+
+        // Função para gerar um avatar aleatório usando RoboHash
+        function getRandomAvatarUrl() {
+            const randomId = Math.floor(Math.random() * 1000);
+            return `https://robohash.org/${randomId}.png?set=set1`; // Usa conjunto de avatares 1
+        }
 
         async function fetchPlacares() {
             const response = await fetch(apiUrl);
@@ -33,9 +56,24 @@
             placaresContainer.innerHTML = '';
 
             placares.forEach(placar => {
-                const placarDiv = document.createElement('div');
-                placarDiv.textContent = `Jogador: ${placar.nomeJogador}, Pontuação: ${placar.pontuacao}, Jogo: ${placar.game}`;
-                placaresContainer.appendChild(placarDiv);
+                const placarItem = document.createElement('a');
+                placarItem.className = 'list-group-item list-group-item-action d-flex align-items-center';
+                
+                // Usa o link de avatar salvo
+                const avatar = document.createElement('img');
+                avatar.src = placar.avatar;
+                avatar.className = 'rounded-circle mr-3';
+                avatar.width = 40;
+                avatar.height = 40;
+                
+                const placarInfo = document.createElement('div');
+                placarInfo.innerHTML = `<strong>Jogador:</strong> ${placar.nomeJogador}<br>
+                                        <strong>Pontuação:</strong> ${placar.pontuacao}<br>
+                                        <strong>Jogo:</strong> ${placar.game}`;
+                
+                placarItem.appendChild(avatar);
+                placarItem.appendChild(placarInfo);
+                placaresContainer.appendChild(placarItem);
             });
         }
 
@@ -45,6 +83,7 @@
             const nomeJogador = document.getElementById('nomeJogador').value;
             const pontuacao = document.getElementById('pontuacao').value;
             const game = document.getElementById('game').value;
+            const avatar = getRandomAvatarUrl(); // Gera um avatar aleatório com RoboHash
 
             const response = await fetch(apiUrl, {
                 method: 'POST',
@@ -52,7 +91,8 @@
                 body: JSON.stringify({
                     nomeJogador,
                     pontuacao,
-                    game
+                    game,
+                    avatar  // Salva o link de avatar aleatório
                 })
             });
 
