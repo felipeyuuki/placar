@@ -1,0 +1,19 @@
+GET http://localhost:3000/placar
+
+###
+
+GET http://localhost:3000/placar?nomeJogador=Dhian
+
+###
+
+GET http://localhost:3000/placar?pontuacao_gt=346
+
+###
+GET http://localhost:3000/placar?pontuacao_lte=345
+
+###
+
+GET https://viacep.p.rapidapi.com/13872440/json HTTP/1.1
+X-Rapidapi-Key: f00d7c2210msh1db7d6aeba7df74p144b7ejsn7443b9ba214e
+X-Rapidapi-Host: viacep.p.rapidapi.com
+Host: viacep.p.rapidapi.com

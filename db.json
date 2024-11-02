@@ -3,44 +3,107 @@
     {
       "id": "1",
       "nomeJogador": "FelipeYuuki",
-      "pontuacao": "300",
+      "pontuacao": 300,
       "game": "Sirils",
       "avatar": "https://robohash.org/texto.png?set=set1"
     },
     {
-      "id": "2",
-      "nomeJogador": "Sol",
-      "pontuacao": 200,
-      "equipe": "Minerik",
-      "avatar": "https://robohash.org/1674.png?set=set1"
-    },
-    {
       "id": "0274",
       "nomeJogador": "Mirian",
-      "pontuacao": "234",
+      "pontuacao": 234,
       "game": "Pokemon",
       "avatar": "https://robohash.org/974.png?set=set1"
     },
     {
       "id": "3b9e",
       "nomeJogador": "sei lah",
-      "pontuacao": "364",
-      "game": "minecraft",
+      "pontuacao": 624,
+      "game": "Minecraft",
       "avatar": "https://robohash.org/sol.png?set=set1"
     },
     {
       "id": "fb7a",
       "nomeJogador": "Bill",
-      "pontuacao": "321",
+      "pontuacao": 5325,
       "game": "Harvest Moon",
       "avatar": "https://robohash.org/874.png?set=set1"
     },
     {
       "id": "af7c",
       "nomeJogador": "fulano",
-      "pontuacao": "4553",
+      "pontuacao": 4553,
       "game": "Core Keeper",
       "avatar": "https://robohash.org/674.png?set=set1"
+    },
+    {
+      "id": "e710",
+      "nomeJogador": "Mirian Santy",
+      "pontuacao": 777,
+      "game": "Sol, a guerreira da luz",
+      "avatar": "https://picsum.photos/seed/772/40"
+    },
+    {
+      "id": "310f",
+      "nomeJogador": "Yui",
+      "pontuacao": 534,
+      "game": "Pokemon",
+      "avatar": "https://picsum.photos/seed/39/40"
+    },
+    {
+      "id": "694c",
+      "nomeJogador": "Dhian",
+      "pontuacao": 876,
+      "game": "Minecraft",
+      "avatar": "https://picsum.photos/seed/120/40"
+    },
+    {
+      "id": "d4fd",
+      "nomeJogador": "Poul",
+      "pontuacao": 656,
+      "game": "Pokemon",
+      "avatar": "https://picsum.photos/seed/376/40"
+    },
+    {
+      "id": "a8c3",
+      "nomeJogador": "Dhian",
+      "pontuacao": 4324,
+      "game": "Tibia",
+      "avatar": "https://picsum.photos/seed/33/40"
+    },
+    {
+      "id": "76f8",
+      "nomeJogador": "Joyskan",
+      "pontuacao": 6567,
+      "game": "Tibia",
+      "avatar": "https://picsum.photos/seed/770/40"
+    },
+    {
+      "id": "8c84",
+      "nomeJogador": "Dendara",
+      "pontuacao": 4246,
+      "game": "Tibia",
+      "avatar": "https://picsum.photos/seed/444/40"
+    },
+    {
+      "id": "92cc",
+      "nomeJogador": "Lary",
+      "pontuacao": 4325,
+      "game": "Harvest Moon",
+      "avatar": "https://picsum.photos/seed/395/40"
+    },
+    {
+      "id": "96ff",
+      "nomeJogador": "Karen",
+      "pontuacao": 4326,
+      "game": "harvest moon",
+      "avatar": "https://picsum.photos/seed/413/40"
+    },
+    {
+      "id": "df07",
+      "nomeJogador": "Bob",
+      "pontuacao": 4356,
+      "game": "Core Keeper",
+      "avatar": "https://picsum.photos/seed/567/40"
     }
   ]
 }

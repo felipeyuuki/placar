@@ -9,6 +9,7 @@
 <body class="bg-light">
     <div class="container my-5">
         <h1 class="text-center mb-4">Placares de Jogos</h1>
+        <h3 class="text-center mb-4">Projeto de Felipe Queiroz dos Santos para o curso de Tecnologia Sistemas para Internet do IFSP de São João da Boa Vista</h3>
         
         <form id="placarForm" class="border p-4 rounded shadow-sm bg-white">
             <div class="form-group">
@@ -45,54 +46,65 @@
         }
 
         async function fetchPlacares() {
-            const response = await fetch(apiUrl);
-            const placares = await response.json();
-            const placaresContainer = document.getElementById('placares');
-            placaresContainer.innerHTML = '';
+    const response = await fetch(apiUrl);
+    let placares = await response.json();
 
-            placares.forEach(placar => {
-                const placarItem = document.createElement('div');
-                placarItem.className = 'list-group-item d-flex justify-content-between align-items-center';
-                
-                const avatar = document.createElement('img');
-                avatar.src = placar.avatar;
-                avatar.className = 'rounded-circle mr-3';
-                avatar.width = 40;
-                avatar.height = 40;
-                
-                const placarInfo = document.createElement('div');
-                placarInfo.innerHTML = `<strong>Jogador:</strong> ${placar.nomeJogador}<br>
-                                        <strong>Pontuação:</strong> ${placar.pontuacao}<br>
-                                        <strong>Jogo:</strong> ${placar.game}`;
-                
-                // Botão de Editar
-                const editButton = document.createElement('button');
-                editButton.className = 'btn btn-sm btn-warning ml-2';
-                editButton.textContent = 'Editar';
-                editButton.onclick = () => editPontuacao(placar.id, placar.pontuacao);
-                
-                // Botão de Apagar
-                const deleteButton = document.createElement('button');
-                deleteButton.className = 'btn btn-sm btn-danger ml-2';
-                deleteButton.textContent = 'Apagar';
-                deleteButton.onclick = () => deletePlacar(placar.id);
-
-                const buttonGroup = document.createElement('div');
-                buttonGroup.appendChild(editButton);
-                buttonGroup.appendChild(deleteButton);
-
-                placarItem.appendChild(avatar);
-                placarItem.appendChild(placarInfo);
-                placarItem.appendChild(buttonGroup);
-                placaresContainer.appendChild(placarItem);
-            });
+    // Ordena os placares por jogo (A-Z, ignorando case) e, dentro de cada jogo, pela pontuação (maior para menor)
+    placares.sort((a, b) => {
+        const gameA = a.game.toLowerCase();
+        const gameB = b.game.toLowerCase();
+        
+        if (gameA === gameB) {
+            return b.pontuacao - a.pontuacao;
         }
+        return gameA.localeCompare(gameB);
+    });
+
+    const placaresContainer = document.getElementById('placares');
+    placaresContainer.innerHTML = '';
+
+    placares.forEach(placar => {
+        const placarItem = document.createElement('div');
+        placarItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+        
+        const avatar = document.createElement('img');
+        avatar.src = placar.avatar;
+        avatar.className = 'rounded-circle mr-3';
+        avatar.width = 40;
+        avatar.height = 40;
+        
+        const placarInfo = document.createElement('div');
+        placarInfo.innerHTML = `<strong>Jogador:</strong> ${placar.nomeJogador}<br>
+                                <strong>Pontuação:</strong> ${placar.pontuacao}<br>
+                                <strong>Jogo:</strong> ${placar.game}`;
+        
+        const editButton = document.createElement('button');
+        editButton.className = 'btn btn-sm btn-warning ml-2';
+        editButton.textContent = 'Editar';
+        editButton.onclick = () => editPontuacao(placar.id, placar.pontuacao);
+        
+        const deleteButton = document.createElement('button');
+        deleteButton.className = 'btn btn-sm btn-danger ml-2';
+        deleteButton.textContent = 'Apagar';
+        deleteButton.onclick = () => deletePlacar(placar.id);
+
+        const buttonGroup = document.createElement('div');
+        buttonGroup.appendChild(editButton);
+        buttonGroup.appendChild(deleteButton);
+
+        placarItem.appendChild(avatar);
+        placarItem.appendChild(placarInfo);
+        placarItem.appendChild(buttonGroup);
+        placaresContainer.appendChild(placarItem);
+    });
+}
+        
 
         async function addPlacar(event) {
             event.preventDefault();
             
             const nomeJogador = document.getElementById('nomeJogador').value;
-            const pontuacao = document.getElementById('pontuacao').value;
+            const pontuacao = parseInt(document.getElementById('pontuacao').value); // Converte para inteiro
             const game = document.getElementById('game').value;
             const avatar = getRandomAvatarUrl();
 
@@ -124,7 +136,7 @@
                 await fetch(`${apiUrl}/${id}`, {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ pontuacao: novaPontuacao })
+                    body: JSON.stringify({ pontuacao: parseInt(novaPontuacao) }) // Converte para inteiro
                 });
                 fetchPlacares();
             }
@@ -133,5 +145,20 @@
         document.getElementById('placarForm').addEventListener('submit', addPlacar);
         fetchPlacares();
     </script>
-</body>
+</body>~
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container text-center">
+        <p class="mb-2">Projeto desenvolvido por <strong>Felipe Queiroz dos Santos</strong> - Curso de Tecnologia em Sistemas para Internet</p>
+        <p class="small mb-3">&copy; 2024 IFSP - São João da Boa Vista</p>
+        <div>
+            <a href="#" class="text-white-50 mx-2"><i class="fab fa-facebook"></i> Facebook</a>
+            <a href="#" class="text-white-50 mx-2"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="#" class="text-white-50 mx-2"><i class="fab fa-github"></i> GitHub</a>
+        </div>
+    </div>
+</footer>
+
+<!-- Link para Font Awesome (ícones das redes sociais) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 </html>
