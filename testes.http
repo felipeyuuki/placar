@@ -26,6 +26,6 @@ Content-Type: application/json
 
 ###
 GET https://viacep.p.rapidapi.com/13872440/json HTTP/1.1
-X-Rapidapi-Key: 
+X-Rapidapi-Key: erro
 X-Rapidapi-Host: viacep.p.rapidapi.com
 Host: viacep.p.rapidapi.com
