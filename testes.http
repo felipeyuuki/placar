@@ -13,7 +13,19 @@ GET http://localhost:3000/placar?pontuacao_lte=345
 
 ###
 
+POST http://localhost:3000/placar
+Content-Type: application/json
+
+{
+    "id": "597",
+    "nomeJogador": "Jason",
+    "pontuacao": 600,
+    "game": "Sirils",
+    "avatar": "https://robohash.org/texto.png?set=set1"
+}
+
+###
 GET https://viacep.p.rapidapi.com/13872440/json HTTP/1.1
-X-Rapidapi-Key: f00d7c2210msh1db7d6aeba7df74p144b7ejsn7443b9ba214e
+X-Rapidapi-Key: 
 X-Rapidapi-Host: viacep.p.rapidapi.com
 Host: viacep.p.rapidapi.com
