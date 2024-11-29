@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:back": "jason-server --watch db.jason --port 3000",
     "build": "vite build",
     "preview": "vite preview"
   },
